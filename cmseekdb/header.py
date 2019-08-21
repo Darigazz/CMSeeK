@@ -92,8 +92,8 @@ def check(h):
         'Set-Cookie: _SOLUSQUARE:-solusquare',
         'Set-Cookie: _spree_store_session:-spree',
         'X-Powered-CMS: Bitrix Site Manager:-bitrix',
-        'X-Powered-By: Brightspot:-brightspot'
-        ''
+        'X-Powered-By: Brightspot:-brightspot',
+        'Set-Cookie: osVisitor=:-outs'
         ]        
         for keyl in hkeys:
             if ':-' in keyl:

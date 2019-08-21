@@ -22,6 +22,7 @@ class MyHTMLParser(HTMLParser):
                             ga = '1'
                             ga_content += ' ' + b
 
+
 def parse(source):
     # clean up ga, ga_content (fix some weird multiple sites scan issue)
     global ga, ga_content
@@ -112,7 +113,8 @@ def scan(content):
                 'rbs change:-rbsc',
                 'sazito:-sazito',
                 'shopfa:-shopfa',
-                'solusquare:-solusquare'
+                'solusquare:-solusquare',
+                '_osjs.js:-outs'
     ]
 
     for keyl in detkeys:
