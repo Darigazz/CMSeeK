@@ -126,7 +126,8 @@ def check(s, site): ## Check if no generator meta tag available
         'Sklep internetowy Shoper.pl:-shoper',
         '//www.googletagmanager.com/ns.html?id=GTM-N2T2D3:-shopery',
         'shopfa_license:-shopfa',
-        '/smjslib.js||/smartstore.core.js:-smartstore'
+        '/smjslib.js||/smartstore.core.js:-smartstore',
+        '<script src="_osjs.js:-outs'
         ]
 
         for keyl in detkeys:

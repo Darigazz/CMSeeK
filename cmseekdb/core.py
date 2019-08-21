@@ -90,7 +90,7 @@ def main_proc(site,cua):
         detection_method = 'header'
         cms = header_detection[1]
         cms_detected = '1'
-
+    
     if cms_detected == '0':
         if ga == '1':
             # cms detection via generator
