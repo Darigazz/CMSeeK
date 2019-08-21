@@ -1,9 +1,0 @@
-{
-    "cms_id": "outs",
-    "cms_name": "OutSystems",
-    "cms_url": "https://www.outsystems.com",
-    "cms_version": "11_0_212_9",
-    "detection_param": "header",
-    "last_scanned": "2019-08-21 12:37:03.122356",
-    "url": "https://neo-lt.outsystemsenterprise.com/"
-}
