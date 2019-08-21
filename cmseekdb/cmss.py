@@ -1130,3 +1130,10 @@ brightspot = {
     'vd':'0',
     'deeps':'0'
 }
+
+outs = {
+    'name':'OutSystems',
+    'url':'https://www.outsystems.com',
+    'vd':'0',
+    'deeps':'0'
+}
