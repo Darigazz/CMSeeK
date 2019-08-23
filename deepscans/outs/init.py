@@ -35,14 +35,17 @@ def _checkUsers(url,ua):
 
 def _checkSC(url,ua):
 	scurl = _processURL(url,'ServiceCenter/Login.aspx')
-	result = [False,'ServiceCenter seems to not be reachable',scurl]
+	result = [False,'ServiceCenter seems to not be reachable',scurl,'no-env','no-key']
 	test_source = cmseek.getsource(scurl,ua)
 
 	if test_source[0] == '1':
 		if 'Welcome to the Service Center' in test_source[1]:
-			result = [True,'ServiceCenter seems to be open to the world (or at least the IP from where you are scanning).',scurl]
+			env = str(re.findall(r'environmentName:\s*\'(.*?)\'',test_source[1])[0])
+			fenv = 'Lifetime' if env == 'Platform Server' else env
+			key = str(re.findall(r'environmentKey:\s*\'(.*?)\'',test_source[1])[0])
+			result = [True,'ServiceCenter seems to be open to the world (or at least the IP from where you are scanning).',scurl,fenv,key]
 		elif '403 - Forbidden' is test_source[1]:
-			result = [False,'ServiceCenter seems to be protected by the Internal Network functionality.',scurl]
+			result = [False,'ServiceCenter seems to be protected by the Internal Network functionality.',scurl,'no-env','no-key']
 	return result		
 
 def start(id, url, ua, ga, source, detection_method, headers):
@@ -56,6 +59,8 @@ def start(id, url, ua, ga, source, detection_method, headers):
 	cms_version = outsverdect.start(id,source)
 	sresult.cms('OutSystems',cms_version,'https://www.outsystems.com')
 	sresult.menu('[OutSystems Deepscan]')
+	sresult.init_item('Environment type: '+ cmseek.bold + cmseek.fgreen + sc[3] + cmseek.cln)
+	sresult.init_item('Environment key: '+ cmseek.bold + cmseek.fgreen + sc[4] + cmseek.cln)
 	sresult.init_item("Users: " + cmseek.bold + cmseek.fgreen + cmseek.cln)
 	sresult.init_sub("URL: " + cmseek.bold + cmseek.fgreen + users[2] + cmseek.cln)
 	sresult.end_sub(cmseek.bold + cmseek.fgreen + users[1] + cmseek.cln)
@@ -65,8 +70,10 @@ def start(id, url, ua, ga, source, detection_method, headers):
 	
 	cmseek.update_log('cms_name', 'OutSystems') # update log
 	if cms_version != '0' and cms_version != None:
-		cmseek.update_log('cms_version', cms_version) # update log
-	cmseek.update_log('cms_url', 'https://www.outsystems.com') # update log	
+		cmseek.update_log('cms_version', cms_version)
+	cmseek.update_log('cms_url', 'https://www.outsystems.com')
+	cmseek.update_log('env_type', sc[3])
+	cmseek.update_log('env_key', sc[4])
 	cmseek.update_log('users_default_credentials',users[1])
 	cmseek.update_log('users_url',users[2])
 	cmseek.update_log('servicecenter_internal_network',sc[1])
