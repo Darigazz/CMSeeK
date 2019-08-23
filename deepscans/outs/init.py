@@ -78,11 +78,3 @@ def start(id, url, ua, ga, source, detection_method, headers):
 		log_file = log_dir + "/cms.json"
 	
 	sresult.end(str(cmseek.total_requests), str(comptime), log_file)
-	
-
-
-
-	
-
-if __name__ == '__main__':
-	print(_processURL('https://igor-antunes.outsystemscloud.com','ServiceCenter'))
