@@ -57,13 +57,14 @@ def start(id, url, ua, ga, source, detection_method, headers):
 	sresult.target(url)
 	cms_version = outsverdect.start(id,source)
 	sresult.cms('OutSystems',cms_version,'https://www.outsystems.com')
-	sresult.init_item("Interesting findings" + cmseek.bold + cmseek.cln)
-	sresult.init_sub(cmseek.bold + cmseek.fgreen + 'Users' + cmseek.cln, False)
-	sresult.init_subsub("URL: " + cmseek.bold + cmseek.fgreen + users[2] + cmseek.cln, False, True)
-	sresult.init_subsub(users[1] + cmseek.bold + cmseek.fgreen + cmseek.cln, False, True)
-	sresult.init_sub(cmseek.bold + cmseek.fgreen + 'ServiceCenter' + cmseek.cln, False)
-	sresult.init_subsub("URL: " + cmseek.bold + cmseek.fgreen + sc[2] + cmseek.cln, False, True)
-	sresult.init_subsub(sc[1] + cmseek.bold + cmseek.fgreen + cmseek.cln, False, True)
+	sresult.menu('[OutSystems Deepscan]')
+	sresult.init_item("Users: " + cmseek.bold + cmseek.fgreen + cmseek.cln)
+	sresult.init_sub("URL: " + cmseek.bold + cmseek.fgreen + users[2] + cmseek.cln)
+	sresult.end_sub(cmseek.bold + cmseek.fgreen + users[1] + cmseek.cln)
+	sresult.end_item("ServiceCenter: " + cmseek.bold + cmseek.fgreen + cmseek.cln)
+	sresult.init_sub("URL: " + cmseek.bold + cmseek.fgreen + sc[2] + cmseek.cln)
+	sresult.end_sub(cmseek.bold + cmseek.fgreen + sc[1] + cmseek.cln)
+	
 	cmseek.update_log('cms_name', 'OutSystems') # update log
 	if cms_version != '0' and cms_version != None:
 		cmseek.update_log('cms_version', cms_version) # update log
@@ -74,8 +75,10 @@ def start(id, url, ua, ga, source, detection_method, headers):
 	cmseek.update_log('servicecenter_url',sc[2])
 	comptime = round(time.time() - cmseek.cstart, 2)
 	log_dir = cmseek.log_dir
+	
 	if log_dir is not "":
 		log_file = log_dir + "/cms.json"
+	
 	sresult.end(str(cmseek.total_requests), str(comptime), log_file)
 	
 
