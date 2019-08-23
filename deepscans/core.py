@@ -16,3 +16,6 @@ def start(id, url, ua, ga, source, ga_content, detection_method='', headers=''):
         # umm... whatever
         import deepscans.umbraco.init as umbracoscan
         umbracoscan.start(id, url, ua, ga, source, detection_method, headers)
+    if id == 'outs':
+        import deepscans.outs.init as outs
+        outs.start(id, url, ua, ga, source, detection_method, headers)
