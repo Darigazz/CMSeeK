@@ -11,40 +11,6 @@ import re
 
 
 
-def _getSourceCode(site,cua):
-	# Copied from cmseekdb/core.py
-	print(site)
-	scode = 'empty'
-	init_source = cmseek.getsource(site, cua)
-	if init_source[0] != '1':
-		cmseek.error("Aborting CMSeek! Couldn't connect to site \n Error: %s" % init_source[1])
-	else:
-		scode = init_source[1]
-		headers = init_source[2]
-		if site != init_source[3] and site + '/' != init_source[3]:
-			if cmseek.redirect_conf == '0':
-				cmseek.info('Target redirected to: ' + cmseek.bold + cmseek.fgreen + init_source[3] + cmseek.cln)
-				follow_redir = input('[#] Set ' + cmseek.bold + cmseek.fgreen + init_source[3] + cmseek.cln + ' as target? (y/n): ')
-				if follow_redir.lower() == 'y':
-					site = init_source[3]
-					cmseek.statement("Reinitiating Headers and Page Source for Analysis")
-					tmp_req = cmseek.getsource(site, cua)
-					scode = tmp_req[1]
-					headers = tmp_req[2]
-			elif cmseek.redirect_conf == '1':
-				site = init_source[3]
-				cmseek.info("Followed redirect, New target: " + cmseek.bold + cmseek.fgreen + init_source[3] + cmseek.cln)
-				tmp_req = cmseek.getsource(site, cua)
-				scode = tmp_req[1]
-				headers = tmp_req[2]
-			else:
-				cmseek.statement("Skipping redirect to " + cmseek.bold + cmseek.red + init_source[3] + cmseek.cln)
-	if scode == '':
-		# silly little check thought it'd come handy
-		cmseek.error('Aborting detection, source code empty')
-	return scode
-
-
 def _processURL(url,target):
 	# add slash at the end of the URL
 	if not url.endswith('/'):

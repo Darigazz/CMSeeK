@@ -15,7 +15,7 @@ def start(id, source):
     cmseek.statement('Detecting OutSystems Version')
     rr = re.findall(r'<script src=\"_osjs\.js\?(.*?)\"', source)
     if rr != []:
-    	version = rr[0]
+    	version = rr[0].replace("_",".")
     	cmseek.success(cmseek.bold + cmseek.fgreen + "Version Detected, OutSystems Version %s" % version + cmseek.cln)
     else:
     	cmseek.error("Couldn't Detect Version")
